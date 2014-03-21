@@ -86,7 +86,10 @@ class AsseticController
             return $response;
         }
 
-        $response->setContent($this->cachifyAsset($asset)->dump());
+        $cacheAsset = $this->cachifyAsset($asset);
+        $cacheAsset->setLastModified($lastModified);
+
+        $response->setContent($cacheAsset->dump());
 
         return $response;
     }
